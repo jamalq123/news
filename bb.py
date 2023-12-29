@@ -1,5 +1,12 @@
 import streamlit as st
+import nltk
 from newspaper import Article
+
+# Download 'punkt' tokenizer if not already downloaded
+nltk.download('punkt', quiet=True)
+
+# Set NLTK data path to ensure access to the 'punkt' tokenizer
+nltk.data.path.append("/path/to/your/nltk_data")
 
 # Function to extract and display article details
 def extract_article_details(article_url):
