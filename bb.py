@@ -35,7 +35,8 @@ def main():
             try:
                 extract_article_details(article_link)
             except Exception as e:
-                st.error("Error: Unable to analyze the article. Please check the link.")
+                st.error(f"Error: Unable to analyze the article. Please check the link. Exception: {e}")
+                st.exception(e)
 
 if __name__ == "__main__":
     main()
