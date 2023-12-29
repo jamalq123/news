@@ -3,6 +3,14 @@ from newspaper import Article
 from googletrans import Translator
 import nltk
 
+import os
+
+# Define NLTK data path using Streamlit environment variables
+st.set_option('deprecation.showfileUploaderEncoding', False)
+
+# Set NLTK data path to ensure access to the 'punkt' tokenizer
+nltk.data.path.append(os.path.join(st.__path__[0], 'nltk_data'))
+
 # Download 'punkt' tokenizer if not already downloaded
 nltk.download('punkt', quiet=True)
 
