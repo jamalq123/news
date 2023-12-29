@@ -35,19 +35,24 @@ def extract_article_details(article_url, target_language):
 
     # Translate content if a target language is selected
     if target_language != "Original" and target_language is not None:
-        translated_title = translator.translate(article.title, dest=target_language).text
-        translated_text = translator.translate(article.text, dest=target_language).text
-        translated_summary = translator.translate(article.summary, dest=target_language).text
+        if article.text:  # Check if the article text is not empty or None
+            translated_title = translator.translate(article.title, dest=target_language).text
+            translated_text = translator.translate(article.text, dest=target_language).text
+            translated_summary = translator.translate(article.summary, dest=target_language).text
 
-        st.header(f"Translated Content ({target_language})")
-        st.subheader("Translated Title")
-        st.write(translated_title)
-        
-        st.subheader("Translated Text")
-        st.write(translated_text)
-        
-        st.subheader("Translated Summary")
-        st.write(translated_summary)
+            st.header(f"Translated Content ({target_language})")
+            st.subheader("Translated Title")
+            st.write(translated_title)
+            
+            st.subheader("Translated Text")
+            st.write(translated_text)
+            
+            st.subheader("Translated Summary")
+            st.write(translated_summary)
+        else:
+            st.warning("No text available for translation.")
+    else:
+        st.info("Select a target language to translate.")
 
 # Streamlit app
 def main():
