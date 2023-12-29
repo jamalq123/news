@@ -1,6 +1,6 @@
 import streamlit as st
 from newspaper import Article
-from deep_translator import GoogleTranslator
+from googletrans import Translator
 import nltk
 
 # Download 'punkt' tokenizer if not already downloaded
@@ -15,6 +15,8 @@ def extract_article_details(article_url, target_language):
     article.download()
     article.parse()
     article.nlp()
+
+    translator = Translator()
     
     st.header("Article Details")
     
@@ -34,9 +36,9 @@ def extract_article_details(article_url, target_language):
     # Translate content if a target language is selected
     if target_language != "Original" and target_language is not None:
         if article.text:  # Check if the article text is not empty or None
-            translated_title = GoogleTranslator(source='auto', target=target_language).translate(article.title)
-            translated_text = GoogleTranslator(source='auto', target=target_language).translate(article.text)
-            translated_summary = GoogleTranslator(source='auto', target=target_language).translate(article.summary)
+            translated_title = translator.translate(article.title, dest=target_language).text
+            translated_text = translator.translate(article.text, dest=target_language).text
+            translated_summary = translator.translate(article.summary, dest=target_language).text
 
             st.header(f"Translated Content ({target_language})")
             st.subheader("Translated Title")
