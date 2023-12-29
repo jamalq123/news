@@ -15,7 +15,6 @@ def extract_article_details(article_url, target_language):
     article.download()
     article.parse()
     article.nlp()
-
     translator = Translator()
     
     st.header("Article Details")
